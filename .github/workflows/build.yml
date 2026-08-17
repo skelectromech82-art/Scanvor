@@ -18,7 +18,6 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        cache: false
 
     - name: Setup Required Android Files
       run: |
@@ -35,4 +34,3 @@ jobs:
       with:
         name: Scanvor-APK
         path: '**/build/outputs/apk/debug/*.apk'
-        
