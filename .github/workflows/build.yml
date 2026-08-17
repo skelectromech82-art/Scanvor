@@ -29,12 +29,12 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew || true
 
-    - name: Build APK
+    - name: Build APK (Show Compilation Errors)
       run: |
         if [ -f "./gradlew" ]; then
-          ./gradlew assembleDebug -Djava.awt.headless=true -Dksp.use.daemon=true
+          ./gradlew assembleDebug --continue -Djava.awt.headless=true
         else
-          gradle assembleDebug -Djava.awt.headless=true -Dksp.use.daemon=true
+          gradle assembleDebug --continue -Djava.awt.headless=true
         fi
 
     - name: Upload APK
@@ -42,3 +42,5 @@ jobs:
       with:
         name: Scanvor-APK
         path: '**/build/outputs/apk/debug/*.apk'
+
+      
