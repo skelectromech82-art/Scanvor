@@ -1,0 +1,7 @@
+{
+  "name": "Scanvoro",
+  "description": "Smart Scanning, Powerful Editing. Document scanner, PDF editor, Handwriting to Word, Object counter, and DWG/CAD measurement viewer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
