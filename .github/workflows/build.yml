@@ -32,9 +32,9 @@ jobs:
     - name: Build APK
       run: |
         if [ -f "./gradlew" ]; then
-          ./gradlew assembleDebug -Djava.awt.headless=true -Dksp.incremental=false --no-daemon
+          ./gradlew assembleDebug -Djava.awt.headless=true --warning-mode=none
         else
-          gradle assembleDebug -Djava.awt.headless=true -Dksp.incremental=false --no-daemon
+          gradle assembleDebug -Djava.awt.headless=true --warning-mode=none
         fi
 
     - name: Upload APK
