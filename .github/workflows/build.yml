@@ -32,9 +32,9 @@ jobs:
     - name: Build APK
       run: |
         if [ -f "./gradlew" ]; then
-          ./gradlew assembleDebug -Djava.awt.headless=true --warning-mode=none
+          ./gradlew assembleDebug -Djava.awt.headless=true -Dksp.use.daemon=true
         else
-          gradle assembleDebug -Djava.awt.headless=true --warning-mode=none
+          gradle assembleDebug -Djava.awt.headless=true -Dksp.use.daemon=true
         fi
 
     - name: Upload APK
@@ -42,4 +42,3 @@ jobs:
       with:
         name: Scanvor-APK
         path: '**/build/outputs/apk/debug/*.apk'
-        
