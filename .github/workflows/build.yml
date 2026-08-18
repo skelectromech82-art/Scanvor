@@ -29,17 +29,19 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew || true
 
-    - name: Build APK (Show Real Errors)
+    - name: Build APK with KSP Fix
+      env:
+        GRADLE_OPTS: "-Djava.awt.headless=true -Dkotlin.compiler.execution.strategy=in-process -Dksp.use.daemon=false"
       run: |
         if [ -f "./gradlew" ]; then
-          ./gradlew assembleDebug --console=plain --info | grep -E "error:|e: |BUILD FAILED" -B 2 -A 5
+          ./gradlew assembleDebug --no-daemon -Dksp.incremental=false
         else
-          gradle assembleDebug --console=plain --info | grep -E "error:|e: |BUILD FAILED" -B 2 -A 5
+          gradle assembleDebug --no-daemon -Dksp.incremental=false
         fi
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: Scanvor-APK
-        path: '**/build/outputs/apk/debug/*.apk'
+        path: app/build/outputs/apk/debug/*.apk
         
