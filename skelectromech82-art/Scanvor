@@ -13,10 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up JDK 17
+    - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
-        java-version: '17'
+        java-version: '21'
         distribution: 'temurin'
 
     - name: Setup Required Android Files
@@ -29,12 +29,14 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew || true
 
-    - name: Build APK (Show Compilation Errors)
+    - name: Build APK
+      env:
+        GRADLE_OPTS: "-Djava.awt.headless=true -Dkotlin.compiler.execution.strategy=in-process"
       run: |
         if [ -f "./gradlew" ]; then
-          ./gradlew assembleDebug --continue -Djava.awt.headless=true
+          ./gradlew assembleDebug --no-daemon
         else
-          gradle assembleDebug --continue -Djava.awt.headless=true
+          gradle assembleDebug --no-daemon
         fi
 
     - name: Upload APK
