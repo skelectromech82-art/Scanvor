@@ -30,18 +30,12 @@ jobs:
       run: chmod +x gradlew || true
 
     - name: Build APK with KSP Fix
-      env:
-        GRADLE_OPTS: "-Djava.awt.headless=true -Dkotlin.compiler.execution.strategy=in-process -Dksp.use.daemon=false"
       run: |
-        if [ -f "./gradlew" ]; then
-          ./gradlew assembleDebug --no-daemon -Dksp.incremental=false
-        else
-          gradle assembleDebug --no-daemon -Dksp.incremental=false
-        fi
+        ./gradlew assembleDebug --no-daemon --no-configuration-cache -Dorg.gradle.jvmargs="-Xmx2048m -Djava.awt.headless=true"
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: Scanvor-APK
-        path: app/build/outputs/apk/debug/*.apk
+        path: app/build/outputs/apk/debug/app-debug.apk
         
